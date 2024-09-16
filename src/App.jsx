@@ -42,6 +42,7 @@ function App() {
     }
   }
 
+ 
   function removeFromCart(id) {
     setCart(prevState => prevState.filter(guitar => guitar.id !== id))
   }

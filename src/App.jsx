@@ -14,10 +14,20 @@ function App() {
     console.log('Componente Listo')
   }, [])*/
 
+  const initialCart = () => {
+    const localStorageCart = localStorage.getItem('cart')
+    return localStorageCart ? JSON.parse(localStorageCart) : [] 
+  }
+
   const [data, setData] = useState(db)
-  const [cart, setCart] = useState([]) //Carrito de compras
+  const [cart, setCart] = useState(initialCart) //Carrito de compras
+  
   const MAX_ITEMS = 5
   const MIN_ITEMS = 1
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
 
   function addToCart(item){
     const itemExists = cart.findIndex(i => i.id === item.id)
@@ -65,6 +75,7 @@ function App() {
   function clearCart() {
     setCart([])
   }
+
 
   return (
     <>

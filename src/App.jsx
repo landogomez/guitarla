@@ -17,8 +17,16 @@ function App() {
   const [data, setData] = useState(db)
   const [cart, setCart] = useState([]) //Carrito de compras
 
-  function addToCart(){
-    console.log('agregando...')
+  function addToCart(item){
+    const itemExists = cart.findIndex(i => i.id === item.id)
+    if(itemExists >= 0) {
+      const updatedCart = [...cart] // Creo una copia del state porque es inmutable el original
+      updatedCart[itemExists].quantity++ // Modifico la copia
+      setCart(updatedCart) // Actualizo el original
+    } else {
+      item.quantity = 1
+      setCart([...cart, item])
+    }
   }
 
   return (

@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react"
 import Header from "./comoponents/Header"
 import Guitar from "./comoponents/Guitar"
-import { db } from './data/db'
+import { useCart } from "./hooks/useCart"
 
 function App() {
   // State
@@ -14,68 +13,8 @@ function App() {
     console.log('Componente Listo')
   }, [])*/
 
-  const initialCart = () => {
-    const localStorageCart = localStorage.getItem('cart')
-    return localStorageCart ? JSON.parse(localStorageCart) : [] 
-  }
-
-  const [data] = useState(db)
-  const [cart, setCart] = useState(initialCart) //Carrito de compras
-  
-  const MAX_ITEMS = 5
-  const MIN_ITEMS = 1
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }, [cart])
-
-  function addToCart(item){
-    const itemExists = cart.findIndex(i => i.id === item.id)
-    if(itemExists >= 0) {
-      if(cart[itemExists].quantity >= MAX_ITEMS) return
-        const updatedCart = [...cart] // Creo una copia del state porque es inmutable el original
-        updatedCart[itemExists].quantity++ // Modifico la copia
-        setCart(updatedCart) // Actualizo el original
-    } else {
-      item.quantity = 1
-      setCart([...cart, item])
-    }
-  }
-
- 
-  function removeFromCart(id) {
-    setCart(prevState => prevState.filter(guitar => guitar.id !== id))
-  }
-
-  function increaseQuantity(id){
-    const updatedCart = cart.map( item => {
-      if(item.id === id && item.quantity < MAX_ITEMS) {
-        return{
-          ...item,
-          quantity: item.quantity + 1
-        }
-      }
-      return item
-    }) 
-    setCart(updatedCart)
-  }
-
-  function decreaseQuantity(id) {
-    const updatedCart = cart.map( item => {
-      if(item.id === id && item.quantity > MIN_ITEMS){
-        return {
-          ...item,
-          quantity: item.quantity -1
-        }
-      }
-      return item
-    })
-    setCart(updatedCart)
-  }
-
-  function clearCart() {
-    setCart([])
-  }
+  const { data, cart, addToCart, removeFromCart, decreaseQuantity, increaseQuantity,
+    clearCart} = useCart()
 
 
   return (
@@ -99,7 +38,6 @@ function App() {
             //Añadiendo props
             key={guitar.id}
             guitar = {guitar}
-            setCart = {setCart}
             addToCart={addToCart}
             />
           ))}

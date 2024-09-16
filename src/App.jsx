@@ -1,7 +1,18 @@
+import { useState, useEffect } from "react"
 import Header from "./comoponents/Header"
 import Guitar from "./comoponents/Guitar"
 
 function App() {
+  // State
+  /*const [auth, setAuth] = useState([])
+  const [Total, setTotal] = useState(0)
+  const [cart, setCart] = useState([])*/
+
+  //useEffect
+  useEffect( () => {
+    console.log('Componente Listo')
+  }, [])
+  
 
   return (
     <>

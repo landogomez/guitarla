@@ -1,15 +1,7 @@
 //import { Fragment } from "react"
 //import React from "react"
-
-import { useMemo } from "react"
-
-export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart}){
-    //En esta seccion van los state o funciones
-    const isEmpty = useMemo( () => cart.length === 0, [cart])
-    const cartTotal = useMemo(() => cart.reduce( (total, item) => total + (item.quantity * item.price), 0),
-    [cart])
-
-
+export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart,
+    isEmpty, cartTotal}){
     return(
         //En esta seccion va HTML/Vista
         

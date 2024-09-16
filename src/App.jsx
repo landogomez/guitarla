@@ -23,9 +23,9 @@ function App() {
     const itemExists = cart.findIndex(i => i.id === item.id)
     if(itemExists >= 0) {
       if(cart[itemExists].quantity >= MAX_ITEMS) return
-      const updatedCart = [...cart] // Creo una copia del state porque es inmutable el original
-      updatedCart[itemExists].quantity++ // Modifico la copia
-      setCart(updatedCart) // Actualizo el original
+        const updatedCart = [...cart] // Creo una copia del state porque es inmutable el original
+        updatedCart[itemExists].quantity++ // Modifico la copia
+        setCart(updatedCart) // Actualizo el original
     } else {
       item.quantity = 1
       setCart([...cart, item])
@@ -61,6 +61,11 @@ function App() {
     })
     setCart(updatedCart)
   }
+
+  function clearCart() {
+    setCart([])
+  }
+
   return (
     <>
     
@@ -69,6 +74,7 @@ function App() {
       removeFromCart = {removeFromCart}
       increaseQuantity = {increaseQuantity}
       decreaseQuantity = {decreaseQuantity}
+      clearCart = {clearCart}
     />
 
     <main className="container-xl mt-5">

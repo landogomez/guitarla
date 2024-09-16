@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import Header from "./comoponents/Header"
 import Guitar from "./comoponents/Guitar"
+import { db } from './data/db'
 
 function App() {
   // State
@@ -9,9 +10,17 @@ function App() {
   const [cart, setCart] = useState([])*/
 
   //useEffect
-  useEffect( () => {
+  /*useEffect( () => {
     console.log('Componente Listo')
+  }, [])*/
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    setData(db)
   }, [])
+
+  console.log(data)
   
 
   return (
@@ -23,7 +32,14 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          <Guitar />
+
+          {data.map((i) => (
+            <Guitar 
+            //Añadiendo props
+            i = {i}
+            
+            />
+          ))}
             
         </div>
     </main>

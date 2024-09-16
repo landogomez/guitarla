@@ -1,7 +1,7 @@
 //import { Fragment } from "react"
 //import React from "react"
 
-export default function Header(){
+export default function Header({cart}){
     //En esta seccion van los state o funciones
 
 

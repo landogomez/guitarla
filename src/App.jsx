@@ -14,14 +14,12 @@ function App() {
     console.log('Componente Listo')
   }, [])*/
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState(db)
+  const [cart, setCart] = useState([]) //Carrito de compras
 
-  useEffect(() => {
-    setData(db)
-  }, [])
-
-  console.log(data)
-  
+  function addToCart(){
+    console.log('agregando...')
+  }
 
   return (
     <>
@@ -33,11 +31,13 @@ function App() {
 
         <div className="row mt-5">
 
-          {data.map((i) => (
+          {data.map((guitar) => (
             <Guitar 
             //Añadiendo props
-            i = {i}
-            
+            key={guitar.id}
+            guitar = {guitar}
+            setCart = {setCart}
+            addToCart={addToCart}
             />
           ))}
             
